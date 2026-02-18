@@ -1,7 +1,23 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { getInitData } from "@/lib/api"
 
-export default function Home() {
+// async function getInitData() {
+//   const res = await fetch('http://local.matsuno-test.hybs.jp/assets/api/getInitData/', {
+//     cache: 'no-store',
+//   });
+//   if (!res.ok) {
+//     throw new Error('Failed to fetch data');
+//   }
+//   return res.json();
+// }
+
+export default async function Home() {
+
+  const data = await getInitData();
+
+  const siteName = data.profile?.SITE_NAME || "To get started, edit the page.js file.";
+  
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -14,7 +30,8 @@ export default function Home() {
           priority
         />
         <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
+          <h1 className="text-3xl font-bold text-red-500">{siteName}</h1>
+          <p>{data.profile?.COMPANY}</p>
           <p>
             Looking for a starting point or more instructions? Head over to{" "}
             <a
