@@ -22,7 +22,7 @@ export default function DefaultListLayout({ slug, layout, articles, categories, 
                 {categories.map((c) => (
                   <li key={c.id}>
                     <Link 
-                      href={`/${slug}/?cat=${c.id}`}
+                      href={`/${slug}/category/${c.id}/`}
                       className={cat === c.id ? "text-blue-600 font-bold" : "text-gray-600"}
                     >
                       {c.name}

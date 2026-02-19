@@ -1,4 +1,29 @@
-import { getArticles } from "@/lib/api";
+export const dynamic = "force-static";
+import { getArticles, getInitData } from "@/lib/api";
+
+export async function generateStaticParams() {
+  const data = await getInitData();
+  const paths = [];
+
+  for (const m of data.modules) {
+    try {
+      const articles = await getArticles(m.slug);
+
+      if (articles && Array.isArray(articles)) {
+        articles.forEach((article) => {
+          paths.push({
+            slug: m.slug,
+            id: article.id.toString(),
+          });
+        });
+      }
+    } catch (e) {
+      console.warn(`Skipping slug: ${m.slug} due to error.`);
+    }
+  }
+
+  return paths;
+}
 
 export default async function DetailPage({ params }) {
   const { slug, id } = await params;
