@@ -2,20 +2,9 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { getInitData } from "@/lib/api"
 
-// async function getInitData() {
-//   const res = await fetch('http://local.matsuno-test.hybs.jp/assets/api/getInitData/', {
-//     cache: 'no-store',
-//   });
-//   if (!res.ok) {
-//     throw new Error('Failed to fetch data');
-//   }
-//   return res.json();
-// }
-
 export default async function Home() {
 
   const data = await getInitData();
-
   const siteName = data.profile?.SITE_NAME || "To get started, edit the page.js file.";
   
   return (
