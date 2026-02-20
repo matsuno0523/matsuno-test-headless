@@ -21,7 +21,7 @@ export async function fetchAPI(endpoint, params = {}) {
 
   if (!res.ok) {
     console.error(`APIエラー: ${res.status} (${url.toString()})`);
-    return null; // throwせずnullを返す方がページ側で処理しやすいです
+    return null;
   }
   return res.json();
 }
