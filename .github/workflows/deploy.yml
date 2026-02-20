@@ -24,6 +24,8 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 
       - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
